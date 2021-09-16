@@ -1,0 +1,17 @@
+{
+  "name": "interval_map",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tekabe Lebiso",
+  "license": "ISC",
+  "dependencies": {
+    "collections": "^5.1.12"
+  },
+  "devDependencies": {
+    "@types/collections": "^5.1.2"
+  }
+}
