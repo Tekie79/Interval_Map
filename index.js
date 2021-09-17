@@ -1,5 +1,8 @@
 const SortedMap = require("collections/sorted-map");
 
+// This is an interval_map container which gives only "NON-OVERLAPPING" keys mapped with their corresponding values.
+// The interval of one pair of key will not intersect with another pair of key.
+
 // create an interval_map class
 
 class IntervalMap {
@@ -44,14 +47,23 @@ class IntervalMap {
 
   lookup(K) {
     // conditions
+
     if (this.sortedMap.length) {
-      this.sortedMap.filter((val, key) => {
+      const result = this.sortedMap.filter((val, key) => {
         if (K >= key[0] && K < key[1]) {
-          console.log(val);
+          return val;
         }
       });
-    } else {
-      console.log(this.default);
+      const [value] = result.values(); // returns an array and destructure it.
+
+      // A filter method is used in order to check if the value is between the intervals.
+      // the method returns an array of value that meets the conditions.
+
+      if (!value) {
+        return this.default;
+      } else {
+        return value;
+      }
     }
   }
 }
@@ -66,14 +78,24 @@ function makePair(K1, K2) {
 
 const myMap = new IntervalMap();
 
+// TESTS
 // make an insertion ...by calling a function 'makePair' inside an 'insert' method which returns an array of paired keys
 
 myMap.insert(makePair(1, 5), 3);
-myMap.insert(makePair(6, 8), 9);
+myMap.insert(makePair(6, 13), 9);
 myMap.insert(makePair(12, 17), 10);
 
 // my lookups
 
-myMap.lookup(1);
-myMap.lookup(7);
-myMap.lookup(13);
+// myMap.lookup(0);
+// myMap.lookup(13);
+// myMap.lookup(12);
+
+//NOTE
+
+/* 
+
+time and space complexity of the above Interval_Map's methods are logarithmic, i.e,  O(log n).
+
+
+*/
