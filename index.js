@@ -24,13 +24,14 @@ class IntervalMap {
 
     if (!this.sortedMap.length) {
       this.sortedMap.add(V, K);
+      console.log(this.sortedMap.has(K));
     } else {
       this.sortedMap.forEach((val, key) => {
         // Check if the new pair of keys intersect the existing one.
         // If the new lowerend(minimum) key(k1) is less than the
         // existing higherend key, i.e, (key[1]), there is an intersection ... remove the old (kay->value) pair.
 
-        if (k1 <= key[1]) {
+        if (k1 <= key[1] || k2 >= key[0]) {
           this.sortedMap.delete(key);
         }
         this.sortedMap.add(V, K);
@@ -54,7 +55,7 @@ class IntervalMap {
           return val;
         }
       });
-      const [value] = result.values(); // returns an array and destructure it.
+      const [value] = result.values(); // returns an array of the values and destructure it.
 
       // A filter method is used in order to check if the value is between the intervals.
       // the method returns an array of value that meets the conditions.
@@ -87,7 +88,7 @@ myMap.insert(makePair(12, 17), 10);
 
 // my lookups
 
-// myMap.lookup(0);
+myMap.lookup(0);
 // myMap.lookup(13);
 // myMap.lookup(12);
 
